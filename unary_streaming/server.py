@@ -6,6 +6,12 @@ import helloworld_pb2_grpc
 
 class Greeter(helloworld_pb2_grpc.GreeterServicer):
     def SayHello(self, request, context):
+        metadata = dict(context.invocation_metadata())
+        print(f"received metadata: {metadata}")
+        
+        # 클라이언트에 메타데이터 전송
+        context.set_trailing_metadata((('server-metadata-key', 'server-metadata-value'),))
+        
         return helloworld_pb2.HelloReply(message=f"Hello, {request.name}!")
     
 def serve():
