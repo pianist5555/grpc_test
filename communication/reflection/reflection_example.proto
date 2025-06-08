@@ -1,0 +1,21 @@
+// 서버에서 어떤 gRPC 서비스와 메서드를 제공해주고 있는지 제공 받기 위함함
+// brew install grpcurl
+// grpcurl -plaintext localhost:50051 list
+// grpcurl -plaintext localhost:50051 describe reflection_example.EchoService
+// 호출 테스트 -> grpcurl -plaintext -d '{"message": "Hello, gRPC!"}' localhost:50051 reflection_example.EchoService/Echo
+
+syntax = "proto3";
+
+package reflection_example;
+
+service EchoService {
+    rpc Echo (EchoRequest) returns (EchoResponse);
+}
+
+message EchoRequest {
+    string message = 1;
+}
+
+message EchoResponse {
+    string message = 1;
+}

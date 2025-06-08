@@ -16,3 +16,10 @@
 ```bash
 python -m grpc_tools.protoc -I . --python_out=. --grpc_python_out=. helloworld.proto
 ```
+
+## 리플렉션 명령어
+```bash
+grpcurl -plaintext localhost:50051 list
+grpcurl -plaintext localhost:50051 describe reflection_example.EchoService
+grpcurl -plaintext -d '{"message": "Hello, gRPC!"}' localhost:50051 reflection_example.EchoService/Echo
+```
