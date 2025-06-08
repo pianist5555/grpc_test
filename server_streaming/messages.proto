@@ -1,0 +1,14 @@
+// 요청을 1번 보내는데 응답을 yield로 순차적으로 내보내주면 grpc 라이브러리가 차례대로 보내줌
+// http 리퀘스트에서는 이런 작업을 하기 위해서는 어려움이 있지만, grpc 스트리밍 통신에서는 쉽게 됨
+
+syntax = "proto3";
+
+package example;
+
+service ChatService {
+    rpc ChatStream (ChatMessage) returns (stream ChatMessage) {}
+}
+
+message ChatMessage {
+    string message = 1;
+}
